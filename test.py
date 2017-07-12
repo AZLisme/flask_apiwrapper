@@ -28,7 +28,7 @@ def api_1_normal():
 
 
 @app.route('/test2/args/<name>', methods=ALL_METHODS)
-@api_wraps('name')
+@api_wraps()
 def api_2_with_args(name, arg1):
     return '%s and %s' % (name, arg1)
 

@@ -64,10 +64,9 @@ class BaseAPIWrapper():
     def lookup_values(cls, para_list, annotations=dict(), default_map=dict(), force_match=False):
         raise NotImplemented()
 
-    def wraps_api(self, exposed_args=None, force_match=False):
+    def wraps_api(self, force_match=False):
         """wrappers a api view. 
 
-        :param exposed_args: defines what parameters shall be exposed to flask, not handled by the wrapper.
         :param force_match: if set to True, raises `ParameterTypeNotMatchException` if fail to convert type.
         """
         def decorator(api_func):
@@ -77,17 +76,12 @@ class BaseAPIWrapper():
             api_func_default_map = self._fetch_function_defaults_dict(api_func)
 
             request_para_set = set(api_func_argset)
-            if exposed_args:
-                if isinstance(exposed_args, str):
-                    exposed_para_set = set(exposed_args.split(' '))
-                else:
-                    exposed_para_set = set(exposed_args)
-                request_para_set = request_para_set - exposed_para_set
 
             @wraps(api_func)
             def wrapper(**kwargs):
+                args = request_para_set - set(kwargs.keys())
                 para_args = self.lookup_values(
-                    list(request_para_set), api_func_annotations, api_func_default_map, force_match)
+                    list(args), api_func_annotations, api_func_default_map, force_match)
                 if para_args and isinstance(para_args, dict):
                     kwargs.update(para_args)
                 return self.handle_return(api_func, api_func(**kwargs))

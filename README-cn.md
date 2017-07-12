@@ -38,17 +38,12 @@ My name is Tony, and I\'m 18, younger than Bill.
 
 ```python
 @app.route('/api/<name>')
-@api_wraps("name")
+@api_wraps()
 def api(name: str, age: int):
     pass
 ```
 
-`api_wraps` 函数接受一个可选参数，指明给上层的flask路由暴露哪些参数。这些参数会被wrapper忽略。
-
-你可以用空格分割的字符串或者一个参数列表来指定，以下两个例子完全等价：
-
-+ "name age gender"
-+ ["name", "age", "gender"]
+一旦使用URL构造器，那么该参数将被忽略，不再保证类型注解的准确性。
 
 #### 参数默认值
 

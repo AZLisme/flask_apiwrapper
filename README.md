@@ -38,17 +38,12 @@ if you use flask's URL builder, it's okay to work with this wrapper:
 
 ```python
 @app.route('/api/<name>')
-@api_wraps("name")
+@api_wraps()
 def api(name: str, age: int):
     pass
 ```
 
-`api_wraps` takes a optional argument to expose some argument to upper flask url builder.
-
-You can use both space splited string or a list of arguments, examples below are same:
-
-+ "name age gender"
-+ ["name", "age", "gender"]
+Once use url build on a argument, the wrapper ignores it, and will not convert it's type any more.
 
 #### Default Values
 
