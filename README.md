@@ -1,4 +1,5 @@
 # Flask API Wrapper
+[![Build Status](https://travis-ci.org/AZLisme/flask_apiwrapper.svg?branch=master)](https://travis-ci.org/AZLisme/flask_apiwrapper)[![Coverage Status](https://coveralls.io/repos/github/AZLisme/flask_apiwrapper/badge.svg?branch=master)](https://coveralls.io/github/AZLisme/flask_apiwrapper?branch=master)
 
 [中文README](README-cn.md)
 
